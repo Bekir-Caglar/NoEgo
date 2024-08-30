@@ -5,9 +5,9 @@
 
 Bu proje, bir BottomNavigationBar'ı switch'lerle kontrol eden bir Android uygulamasıdır. Switch'ler, BottomNavigationBar'daki öğeleri dinamik olarak günceller.
 
-![Uygulama Ekran Görüntüsü 1](https://github.com/user-attachments/assets/f498119d-8b39-4ea2-bd26-2b81bc460b76)
-![Uygulama Ekran Görüntüsü 2](https://github.com/user-attachments/assets/ec0e48b6-2596-473d-b7d4-5a4e3b6ec27a)
-![Uygulama Ekran Görüntüsü 3](https://github.com/user-attachments/assets/677512a3-0234-4bdb-b2f3-5a16b0a9e58c)
+![Screenshot_1](https://github.com/user-attachments/assets/da25b770-42fb-4089-b82e-0e70ad830b73)
+![Screenshot_2](https://github.com/user-attachments/assets/b753ba7d-2a5a-4ae2-bfc0-a6e440570b37)
+
 
 ## Özellikler
 
