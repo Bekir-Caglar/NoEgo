@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
-    tools:context=".OptimismFragment">
+    android:background="@android:color/holo_red_light"
+    tools:context=".KindnessFragment">
 
 
 
@@ -14,7 +14,7 @@
         android:layout_height="72dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/optimism"
+        android:text="@string/kindness"
         android:textColor="@color/white"
         android:textSize="30sp" />
 

@@ -1,5 +1,6 @@
 package com.bekircaglar.noego
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -14,6 +15,16 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var switchStateListener: OnSwitchStateChangedListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnSwitchStateChangedListener) {
+            switchStateListener = context
+        } else {
+            throw RuntimeException("$context must implement OnSwitchStateChangedListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +76,7 @@ class HomeFragment : Fragment() {
         }
 
         egoSwitch.setOnCheckedChangeListener { _, isChecked ->
+            switchStateListener?.onSwitchStateChanged(NavItem(0, 0, "Ego"), isChecked)
             if (isChecked) {
                 setOtherSwitchesEnabled(false)
                 kindnessSwitch.isChecked = false
@@ -77,39 +89,35 @@ class HomeFragment : Fragment() {
             }
         }
 
-        kindnessSwitch.setOnCheckedChangeListener { _, _ ->
-            if (egoSwitch.isChecked) {
-                kindnessSwitch.isChecked = false
-            }
-        }
+        val navItems = listOf(
+            NavItem(R.id.kindnessFragment, R.drawable.ic_kindness, "Kindness"),
+            NavItem(R.id.optimismFragment, R.drawable.ic_optimism, "Optimism"),
+            NavItem(R.id.respectFragment, R.drawable.ic_respect, "Respect"),
+            NavItem(R.id.givingFragment, R.drawable.ic_giving, "Giving"),
+            NavItem(R.id.happinessFragment, R.drawable.ic_happiness, "Happiness")
+        )
 
-        optimismSwitch.setOnCheckedChangeListener { _, _ ->
-            if (egoSwitch.isChecked) {
-                optimismSwitch.isChecked = false
-            }
-        }
+        val switches = listOf(
+            kindnessSwitch to navItems[0],
+            optimismSwitch to navItems[1],
+            respectSwitch to navItems[2],
+            givingSwitch to navItems[3],
+            happinessSwitch to navItems[4]
+        )
 
-        respectSwitch.setOnCheckedChangeListener { _, _ ->
-            if (egoSwitch.isChecked) {
-                respectSwitch.isChecked = false
-            }
-        }
-
-        givingSwitch.setOnCheckedChangeListener { _, _ ->
-            if (egoSwitch.isChecked) {
-                givingSwitch.isChecked = false
-            }
-        }
-
-        happinessSwitch.setOnCheckedChangeListener { _, _ ->
-            if (egoSwitch.isChecked) {
-                happinessSwitch.isChecked = false
+        switches.forEach { (switch, navItem) ->
+            switch.setOnCheckedChangeListener { _, isChecked ->
+                if (egoSwitch.isChecked) {
+                    switch.isChecked = false
+                } else {
+                    switchStateListener?.onSwitchStateChanged(navItem, isChecked)
+                }
             }
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
