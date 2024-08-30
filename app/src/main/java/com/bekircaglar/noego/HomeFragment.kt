@@ -93,11 +93,11 @@ class HomeFragment : Fragment() {
         }
 
         val navItems = listOf(
-            NavItem(R.id.kindnessFragment, R.drawable.ic_kindness, "Kindness"),
-            NavItem(R.id.optimismFragment, R.drawable.ic_optimism, "Optimism"),
-            NavItem(R.id.respectFragment, R.drawable.ic_respect, "Respect"),
-            NavItem(R.id.givingFragment, R.drawable.ic_giving, "Giving"),
-            NavItem(R.id.happinessFragment, R.drawable.ic_happiness, "Happiness")
+            NavItem(R.id.kindnessFragment, R.drawable.ic_kindness, getString(R.string.kindness)),
+            NavItem(R.id.optimismFragment, R.drawable.ic_optimism, getString(R.string.optimism)),
+            NavItem(R.id.respectFragment, R.drawable.ic_respect, getString(R.string.respect)),
+            NavItem(R.id.givingFragment, R.drawable.ic_giving, getString(R.string.giving)),
+            NavItem(R.id.happinessFragment, R.drawable.ic_happiness, getString(R.string.happiness))
         )
 
         val switches = listOf(
