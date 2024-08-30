@@ -10,7 +10,7 @@ Bu proje, bir BottomNavigationBar'ı switch'lerle kontrol eden bir Android uygul
 
 
 ## Özellikler
-
+- **Dil Desteği :** Uygulamada türkçe ve ingilizce dil desteği bulunuyor.
 - **Başlangıç Durumu:** Uygulama açıldığında 6 switch bulunur ve "Ego" switch’i açık olur.
 - **Ego Switch:** Ego switch’i açık olduğunda diğer switch'ler devre dışı kalır ve BottomNavigationBar gizlenir. Ego switch’i kapalı olduğunda diğer switch'ler açılabilir ve BottomNavigationBar görünür.
 - **Detay Ekranları:** BottomNavigationBar'daki öğelere tıklandığında ilgili detay ekranlarına gidilir.
