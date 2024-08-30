@@ -9,4 +9,9 @@
     <string name="respect">Respect</string>
     <string name="ego">Ego</string>
     <string name="home">Home</string>
+    <string name="giving_message">Giving refers to the act of providing help and support to others. This can involve financial assistance, but it also includes offering time, knowledge, or emotional support. Giving is a significant source of satisfaction for both the giver and the recipient and can strengthen social bonds.</string>
+    <string name="happiness_message">Happiness is defined as a state of overall contentment and enjoyment of life. On both personal and societal levels, happiness is often associated with good relationships, achievements, health, and positive thinking. It is an important emotional state that enhances quality of life.</string>
+    <string name="kindness_message">Kindness involves being understanding and considerate towards others. It is a sign of empathy and respect for others\' needs. Kindness creates a positive atmosphere in relationships and promotes solidarity within a community.</string>
+    <string name="optimism_message">Optimism is a positive and hopeful outlook on the future. Optimistic individuals expect positive outcomes even in the face of challenges, and this attitude can help them overcome difficulties. Optimism has beneficial effects on overall mood and life satisfaction.</string>
+    <string name="respect_message">Respect means valuing others\' thoughts, feelings, and rights. This involves behaviors such as listening, showing tolerance, and recognizing personal boundaries. Respect is fundamental to healthy and constructive relationships and is crucial for social harmony.</string>
 </resources>

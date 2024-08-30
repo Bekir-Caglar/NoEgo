@@ -1,6 +1,7 @@
 package com.bekircaglar.noego
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity(), OnSwitchStateChangedListener {
         if (selectedItems.contains(navItem)) return
 
         if (selectedItems.size >= 5) {
+            Toast.makeText(this, "Hey stranger! you can only select up to 5 items", Toast.LENGTH_SHORT).show()
             selectedItems.removeAt(0)
         }
 
