@@ -75,6 +75,9 @@ class HomeFragment : Fragment() {
             happinessSwitch.isEnabled = enabled
         }
 
+        // Initialize Ego switch state
+        egoSwitch.isChecked = true // Set Ego switch to checked by default
+
         egoSwitch.setOnCheckedChangeListener { _, isChecked ->
             switchStateListener?.onSwitchStateChanged(NavItem(0, 0, "Ego"), isChecked)
             if (isChecked) {
@@ -121,3 +124,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
