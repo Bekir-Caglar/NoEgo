@@ -8,6 +8,7 @@
     <string name="respect">Saygı</string>
     <string name="ego">Ego</string>
     <string name="home">Ana Sayfa</string>
+    <string name="max_items_toast">En fazla 5 item ekleyebilirsiniz</string>
     <string name="giving_message">Vermek, başkalarına yardım ve destek sağlama eylemini ifade eder. Bu, finansal yardım içerebileceği gibi, zaman, bilgi veya duygusal destek de sunmayı içerir. Vermek, hem verici hem de alıcı için önemli bir tatmin kaynağıdır ve sosyal bağları güçlendirebilir.</string>
     <string name="happiness_message">Mutluluk, genel memnuniyet ve yaşamın keyfini çıkarma durumu olarak tanımlanır. Hem kişisel hem de toplumsal düzeyde, mutluluk genellikle iyi ilişkiler, başarılar, sağlık ve olumlu düşünme ile ilişkilendirilir. Hayat kalitesini artıran önemli bir duygusal durumdur.</string>
     <string name="kindness_message">Naz, başkalarına karşı anlayışlı ve düşünceli olmayı içerir. Başkalarının ihtiyaçlarına empati ve saygı göstermek anlamına gelir. Naz, ilişkilerde olumlu bir atmosfer yaratır ve bir topluluk içinde dayanışmayı teşvik eder.</string>

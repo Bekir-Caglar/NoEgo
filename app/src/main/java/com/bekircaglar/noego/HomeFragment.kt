@@ -1,127 +1,80 @@
 package com.bekircaglar.noego
 
-import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bekircaglar.noego.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
-    private var switchStateListener: OnSwitchStateChangedListener? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnSwitchStateChangedListener) {
-            switchStateListener = context
-        } else {
-            throw RuntimeException("$context must implement OnSwitchStateChangedListener")
-        }
-    }
+    private lateinit var binding: FragmentHomeBinding
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        setupSwitchListeners()
+        restoreSwitchStates()
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val kindnessSwitch = binding.kindnessSwitch
-        val optimismSwitch = binding.optimismSwitch
-        val respectSwitch = binding.respectSwitch
-        val givingSwitch = binding.givingSwitch
-        val egoSwitch = binding.egoSwitch
-        val happinessSwitch = binding.happinessSwitch
-
-        val colorStateList = ColorStateList(
-            arrayOf(
-                intArrayOf(android.R.attr.state_checked),
-                intArrayOf(-android.R.attr.state_checked)
-            ),
-            intArrayOf(
-                Color.GREEN,
-                Color.RED
-            )
-        )
-
-        fun setSwitchColors(switch: Switch) {
-            switch.trackTintList = colorStateList
-            switch.thumbTintList = colorStateList
+    private fun setupSwitchListeners() {
+        binding.egoSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.toggleSwitch("ego", isChecked)
+            // Other switches should be disabled or enabled based on ego switch state
+            setSwitchesEnabled(!isChecked)
         }
-
-        setSwitchColors(kindnessSwitch)
-        setSwitchColors(optimismSwitch)
-        setSwitchColors(respectSwitch)
-        setSwitchColors(givingSwitch)
-        setSwitchColors(egoSwitch)
-        setSwitchColors(happinessSwitch)
-
-        fun setOtherSwitchesEnabled(enabled: Boolean) {
-            kindnessSwitch.isEnabled = enabled
-            optimismSwitch.isEnabled = enabled
-            respectSwitch.isEnabled = enabled
-            givingSwitch.isEnabled = enabled
-            happinessSwitch.isEnabled = enabled
+        binding.happinessSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.toggleSwitch("happiness", isChecked)
         }
-
-        // Initialize Ego switch state
-        egoSwitch.isChecked = true // Set Ego switch to checked by default
-
-        egoSwitch.setOnCheckedChangeListener { _, isChecked ->
-            switchStateListener?.onSwitchStateChanged(NavItem(0, 0, "Ego"), isChecked)
-            if (isChecked) {
-                setOtherSwitchesEnabled(false)
-                kindnessSwitch.isChecked = false
-                optimismSwitch.isChecked = false
-                respectSwitch.isChecked = false
-                givingSwitch.isChecked = false
-                happinessSwitch.isChecked = false
-            } else {
-                setOtherSwitchesEnabled(true)
-            }
+        binding.optimismSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.toggleSwitch("optimism", isChecked)
         }
-
-        val navItems = listOf(
-            NavItem(R.id.kindnessFragment, R.drawable.ic_kindness, getString(R.string.kindness)),
-            NavItem(R.id.optimismFragment, R.drawable.ic_optimism, getString(R.string.optimism)),
-            NavItem(R.id.respectFragment, R.drawable.ic_respect, getString(R.string.respect)),
-            NavItem(R.id.givingFragment, R.drawable.ic_giving, getString(R.string.giving)),
-            NavItem(R.id.happinessFragment, R.drawable.ic_happiness, getString(R.string.happiness))
-        )
-
-        val switches = listOf(
-            kindnessSwitch to navItems[0],
-            optimismSwitch to navItems[1],
-            respectSwitch to navItems[2],
-            givingSwitch to navItems[3],
-            happinessSwitch to navItems[4]
-        )
-
-        switches.forEach { (switch, navItem) ->
-            switch.setOnCheckedChangeListener { _, isChecked ->
-                if (egoSwitch.isChecked) {
-                    switch.isChecked = false
-                } else {
-                    switchStateListener?.onSwitchStateChanged(navItem, isChecked)
-                }
-            }
+        binding.kindnessSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.toggleSwitch("kindness", isChecked)
+        }
+        binding.givingSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.toggleSwitch("giving", isChecked)
+        }
+        binding.respectSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.toggleSwitch("respect", isChecked)
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun restoreSwitchStates() {
+        viewModel.isEgoOn.observe(viewLifecycleOwner) { isEgoOn ->
+            binding.egoSwitch.isChecked = isEgoOn
+            // Enable or disable other switches based on the state of the ego switch
+            setSwitchesEnabled(!isEgoOn)
+        }
+        viewModel.isHappinessOn.observe(viewLifecycleOwner) { isChecked ->
+            binding.happinessSwitch.isChecked = isChecked
+        }
+        viewModel.isOptimismOn.observe(viewLifecycleOwner) { isChecked ->
+            binding.optimismSwitch.isChecked = isChecked
+        }
+        viewModel.isKindnessOn.observe(viewLifecycleOwner) { isChecked ->
+            binding.kindnessSwitch.isChecked = isChecked
+        }
+        viewModel.isGivingOn.observe(viewLifecycleOwner) { isChecked ->
+            binding.givingSwitch.isChecked = isChecked
+        }
+        viewModel.isRespectOn.observe(viewLifecycleOwner) { isChecked ->
+            binding.respectSwitch.isChecked = isChecked
+        }
+    }
+
+    private fun setSwitchesEnabled(enabled: Boolean) {
+        binding.happinessSwitch.isEnabled = enabled
+        binding.optimismSwitch.isEnabled = enabled
+        binding.kindnessSwitch.isEnabled = enabled
+        binding.givingSwitch.isEnabled = enabled
+        binding.respectSwitch.isEnabled = enabled
     }
 }
-
