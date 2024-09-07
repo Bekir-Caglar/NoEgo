@@ -1,5 +1,6 @@
 package com.bekircaglar.noego
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ class GivingFragment : Fragment() {
 
     private var _binding: FragmentGivingBinding? = null
     private val binding get() = _binding!!
+    private lateinit var mediaPlayer: MediaPlayer
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,10 +25,22 @@ class GivingFragment : Fragment() {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.giving)
+
+        val playButton = binding.buttonPlaySoundGiving
+        playButton.setOnClickListener {
+            mediaPlayer.start()
+        }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (this::mediaPlayer.isInitialized) {
+            mediaPlayer.release()
+        }
+        _binding = null
+    }
 }
