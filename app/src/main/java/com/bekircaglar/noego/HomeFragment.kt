@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
     private fun restoreSwitchStates() {
         viewModel.isEgoOn.observe(viewLifecycleOwner) { isEgoOn ->
             binding.egoSwitch.isChecked = isEgoOn
-            // Enable or disable other switches based on the state of the ego switch
+
             setSwitchesEnabled(!isEgoOn)
         }
         viewModel.isHappinessOn.observe(viewLifecycleOwner) { isChecked ->
