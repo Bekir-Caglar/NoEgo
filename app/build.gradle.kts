@@ -42,6 +42,7 @@ dependencies {
     testImplementation (libs.truth)
     testImplementation (libs.androidx.core.testing)
     implementation(libs.androidx.navigation.fragment)
+    implementation (libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.ui)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
